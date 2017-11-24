@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+        
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>-</title>
+        <meta name="description" content="An interactive getting started guide for Brackets.">
+    </head>
+    <body>
+          
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Tipo traslado
+                    </th>
+                    <th>
+                        Seleccionado
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        Ida <input type="checkbox" class="check" id="ida0" data-id="0" data-idviaje="1"/>
+                        Vuelta <input type="checkbox" class="check" id="vuelta0" data-id="0" data-idviaje="2"/>
+                        Ida/Vuelta <input type="checkbox" class="check" id="idavuelta0" data-id="0" data-idviaje="3"/>
+                    </td>
+                    <td>
+                        <input type="text"  id="input0">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Ida <input type="checkbox" class="check" id="ida1" data-id="1" data-idviaje="1"/>
+                        Vuelta <input type="checkbox" class="check" id="vuelta1"  data-id="1" data-idviaje="2"/>
+                        Ida/Vuelta <input type="checkbox" class="check" id="idavuelta1"  data-id="1" data-idviaje="3"/>
+                    </td>
+                    <td>
+                        <input type="text" id="input1">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Ida <input type="checkbox" class="check" id="ida2" data-id="2" data-idviaje="1"/>
+                        Vuelta <input type="checkbox" class="check" id="vuelta2" data-id="2" data-idviaje="2"/>
+                        Ida/Vuelta <input type="checkbox" class="check" id="idavuelta2" data-id="2" data-idviaje="3"/>
+                    </td>
+                    <td>
+                        <input type="text" id="input2">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
+<script>
+    document.getElementById("ida0").onclick = function(){myFunc(this);}
+		document.getElementById("vuelta0").onclick = function(){myFunc(this);}
+		document.getElementById("idavuelta0").onclick = function(){myFunc(this);}
+		document.getElementById("ida1").onclick = function(){myFunc(this);}
+		document.getElementById("vuelta1").onclick = function(){myFunc(this);}
+		document.getElementById("idavuelta1").onclick = function(){myFunc(this);}
+		//
+		document.getElementById("ida2").onclick = function(){myFunc(this);}
+		document.getElementById("vuelta2").onclick = function(){myFunc(this);}
+		document.getElementById("idavuelta2").onclick = function(){myFunc(this);}
+		
+		
+		function myFunc(objeto)
+    {
+        var fila = objeto.getAttribute("data-id")
+
+        var checks = [document.getElementById("ida"+fila) , document.getElementById("vuelta"+fila), document.getElementById("idavuelta"+fila)];
+        for(var x = 0; x < checks.length ; x++)
+            {
+            if(objeto.checked == false)
+            {
+				checks[x].disabled = false;
+            }
+            else
+            {
+                if( (checks[x].getAttribute("data-id") == objeto.getAttribute("data-id")) && (checks[x] != objeto))
+                    {
+                        checks[x].checked=false;
+                        if(objeto.getAttribute("data-idviaje") == 3 && checks[x].getAttribute("data-idviaje") != 3)
+                            {
+                                checks[x].disabled = true;
+                            }
+                        
+                        if(objeto.getAttribute("data-idviaje") < 3 && checks[x].getAttribute("data-idviaje") == 3)
+                            {
+                                checks[x].disabled = true;
+                            }
+                    }
+                }
+            }
+        if(objeto.checked == false)
+		{
+			document.getElementById("input"+fila).value = 0;
+		}
+		else
+		{
+			document.getElementById("input"+fila).value = objeto.getAttribute("data-idviaje");
+        }
+    }
+</script>
