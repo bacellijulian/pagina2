@@ -3,64 +3,68 @@
     
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-
-        
         
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>-</title>
         <meta name="description" content="An interactive getting started guide for Brackets.">
     </head>
-    <body>
-          
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        Tipo traslado
-                    </th>
-                    <th>
-                        Selección
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        Ida <input type="checkbox" class="check" id="ida0" data-id="0" data-idviaje="1"/>
-                        Vuelta <input type="checkbox" class="check" id="vuelta0" data-id="0" data-idviaje="2"/>
-                        Ida/Vuelta <input type="checkbox" class="check" id="idavuelta0" data-id="0" data-idviaje="3"/>
-                    </td>
-                    <td>
-                        <input type="text"  id="input0">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Ida <input type="checkbox" class="check" id="ida1" data-id="1" data-idviaje="1"/>
-                        Vuelta <input type="checkbox" class="check" id="vuelta1"  data-id="1" data-idviaje="2"/>
-                        Ida/Vuelta <input type="checkbox" class="check" id="idavuelta1"  data-id="1" data-idviaje="3"/>
-                    </td>
-                    <td>
-                        <input type="text" id="input1">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Ida <input type="checkbox" class="check" id="ida2" data-id="2" data-idviaje="1"/>
-                        Vuelta <input type="checkbox" class="check" id="vuelta2" data-id="2" data-idviaje="2"/>
-                        Ida/Vuelta <input type="checkbox" class="check" id="idavuelta2" data-id="2" data-idviaje="3"/>
-                    </td>
-                    <td>
-                        <input type="text" id="input2">
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <body class="main-container">
+        <div class="col-md-12">
+            <div class="col-sm-12 col-md-6">
+              <img src="julian.jpg" class="img-responsive">
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Tipo traslado
+                        </th>
+                        <th>
+                            Selección
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            Ida <input type="checkbox" class="check" id="ida0" data-id="0" data-idviaje="1"/>
+                            Vuelta <input type="checkbox" class="check" id="vuelta0" data-id="0" data-idviaje="2"/>
+                            Ida/Vuelta <input type="checkbox" class="check" id="idavuelta0" data-id="0" data-idviaje="3"/>
+                        </td>
+                        <td>
+                            <input type="text"  id="input0">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Ida <input type="checkbox" class="check" id="ida1" data-id="1" data-idviaje="1"/>
+                            Vuelta <input type="checkbox" class="check" id="vuelta1"  data-id="1" data-idviaje="2"/>
+                            Ida/Vuelta <input type="checkbox" class="check" id="idavuelta1"  data-id="1" data-idviaje="3"/>
+                        </td>
+                        <td>
+                            <input type="text" id="input1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Ida <input type="checkbox" class="check" id="ida2" data-id="2" data-idviaje="1"/>
+                            Vuelta <input type="checkbox" class="check" id="vuelta2" data-id="2" data-idviaje="2"/>
+                            Ida/Vuelta <input type="checkbox" class="check" id="idavuelta2" data-id="2" data-idviaje="3"/>
+                        </td>
+                        <td>
+                            <input type="text" id="input2">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
     </body>
     <footer>
         
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous" async></script>
+        
 
 <script>
     document.getElementById("ida0").onclick = function(){myFunc(this);}
