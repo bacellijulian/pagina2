@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <link rel="stylesheet" href="css/bootstrap.min.css" >  
+        <script src="js/jquery-3.2.1.min.js"></script>
+        
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>-</title>
+        <meta name="description" content="An interactive getting started guide for Brackets.">
+    </head>
+    <body>
+        <div class="container">
+            <div>
+                <div class="row">
+                    <div class="col-md-2 col-sm-2">
+                        <input type="button" class="btn btn-primary" value="<" id="btnAnterior"/>
+                    </div>
+                    <div class="col-md-8 col-sm-8">
+                        <h1 style="widht:100%; text-align: center;"><span id="nombreCalendario"> mes </span></h1>
+                    </div>
+                    <div class="col-md-2 col-sm-2">
+                        <input type="button" class="btn btn-primary" value=">" id="btnSiguiente"/>
+                    </div>
+                </div>
+                <div>
+                    <div id="containerCalendario">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    
+    <footer>
+        <style>
+            .table{
+                width: 0px !important;
+            }
+            
+            .diaLibre{
+                color:#fafafa; font-weight: bold; border: 1px solid #000000;
+                 background-color:#7fb76d;
+                text-align: right;
+            }
+            
+            .diaNoDisponible{
+                border: 1px solid #000000;
+                background-color:#eaeaea;
+            }
+            
+            table{
+                -webkit-transition: width 2s; /* Safari */
+                transition: width 2s;
+            }
+        </style>
+        
+        <script>
+            $(document).ready(function()
+              {
+
+                Date.prototype.yyyymmdd = function() {
+                  var yyyy = this.getFullYear().toString();
+                  var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
+                  var dd  = this.getDate().toString();
+                  return yyyy + "/" + (mm[1]?mm:"0"+mm[0]) + "/" + (dd[1]?dd:"0"+dd[0]); // padding
+                };
+                
+                var tamanoDia = "90px";
+                var month = 11;
+                var year = 2017;
+                
+                function crearCabecera()
+                {
+                    var head = $("<thead>");
+
+                    var Dias = ["DOM", "LUN", "MAR", "MIE", "JUE", "VIE", "SAB"];
+
+                    for(var index = 0; index< Dias.length ; index++)
+                        {
+                            head.append("<th style='border: 1px solid black;'>" + Dias[index] + "</th>");
+                        }
+                    return head;
+                }
+                function crearCuerpo(year, month)
+                {
+                    var body = $("<tbody>");
+                    
+                    var date = new Date(year,(month-1),1);
+                    for(var semana = 0; date.getMonth() == (month-1); semana++)
+                        {
+                            body.append("<tr>");
+
+                            for(var x = 0; x<= 6 ; x++)
+                                {
+                                    if(date.getDay() == x)
+                                        {
+                                            if(date.getMonth() == (month-1))
+                                                {
+                                                    crearDia(body, date.getUTCDate());
+                                                }
+                                            else
+                                                {
+                                                     crearDiaVacio(body);
+                                                }
+                                            date.setDate(date.getDate()+1);
+                                        }
+                                    else
+                                        {
+                                             crearDiaVacio(body);
+                                        }
+                                }
+                            body.append("</tr>");
+                        }
+                    return body;
+                }
+                
+                function crearDia(body, fecha)
+                {
+                    body.append("<td class='diaLibre' style=' width:" + tamanoDia + "; height:" + tamanoDia +";'>"+ fecha + "</td>");
+                }
+                
+                function crearDiaVacio(body)
+                {
+                    body.append("<td class='diaNoDisponible'></td>");
+                }
+                
+                function limpiarCalendario(funcion)
+                {
+                    $("#containerCalendario").fadeOut("slow", function()
+                                                      {
+                        $("#containerCalendario").empty();
+                        funcion();
+                    });
+                }
+                
+                function crearCalendario(month, year)
+                {
+                    var tabla = $("<table>", {"class":"table"});
+                    
+                    var head = crearCabecera();
+                    var body = crearCuerpo(year,month);
+                    
+                    tabla.append(head);
+                    tabla.append(body);
+                    $("#containerCalendario").append(tabla);
+                    
+                    var meses = [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
+               "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ];
+                    $("#nombreCalendario").text(meses[month-1] + " " + year);
+                    
+                    $("#containerCalendario").fadeIn("slow");
+                }
+
+                crearCalendario(month,year);
+                
+                $("#btnSiguiente").on("click", function(e)
+                                     {
+                    limpiarCalendario(function()
+                                     {
+                        if(month < 12)
+                        {
+                            month++;
+                        }
+                        else
+                        {
+                            month = 1;
+                            year++;
+                        }
+                        crearCalendario(month, year);
+                    });
+                    
+                })
+                
+                $("#btnAnterior").on("click", function(e)
+                                     {
+                    limpiarCalendario(function()
+                                     {
+                        if(month > 1)
+                        {
+                            month--;
+                        }
+                        else
+                        {
+                            month = 12;
+                            year--;
+                        }
+                        crearCalendario(month, year);
+                    });
+                    
+                })
+            });
+        </script>
+    </footer>
+</html>
+
