@@ -71,18 +71,38 @@
                 var month = 11;
                 var year = 2017;
                 
+                var Dia = function()
+                {
+                    var Dias = ["DOM", "LUN", "MAR", "MIE", "JUE", "VIE", "SAB"];
+                    
+                    return{
+                        nombre: function(numero){ return Dias[numero];},
+                        numero: function(nombre){ return Dias.indexOf(nombre);}
+                    }
+                }();
+                
+                var Mes = function()
+                {
+                    var meses = [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
+               "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ];
+                    
+                    return{
+                        nombre: function(numero){ return meses[numero-1];},
+                        numero: function(nombre){ return (meses.indexOf(nombre)+1);}
+                    }
+                }();
+                
                 function crearCabecera()
                 {
                     var head = $("<thead>");
 
-                    var Dias = ["DOM", "LUN", "MAR", "MIE", "JUE", "VIE", "SAB"];
-
-                    for(var index = 0; index< Dias.length ; index++)
+                    for(var index = 0; index< 7 ; index++)
                         {
-                            head.append("<th style='border: 1px solid black;'>" + Dias[index] + "</th>");
+                            head.append("<th style='border: 1px solid black;'>" + Dia.nombre(index) + "</th>");
                         }
                     return head;
                 }
+                
                 function crearCuerpo(year, month)
                 {
                     var body = $("<tbody>");
@@ -146,9 +166,7 @@
                     tabla.append(body);
                     $("#containerCalendario").append(tabla);
                     
-                    var meses = [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
-               "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ];
-                    $("#nombreCalendario").text(meses[month-1] + " " + year);
+                    $("#nombreCalendario").text(Mes.nombre(month) + " " + year);
                     
                     $("#containerCalendario").fadeIn("slow");
                 }
